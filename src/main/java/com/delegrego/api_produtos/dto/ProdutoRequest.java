@@ -1,0 +1,18 @@
+package com.delegrego.api_produtos.dto;
+
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
+public record ProdutoRequest(
+
+		@NotBlank(message = "Nome é obrigatório")
+		@Size(message = "Nome não pode ultrapassar 50 caracteres")
+		String nome,
+
+		@PositiveOrZero(message = "Preço não pode ser negativo")
+		@Digits(integer = 10, fraction = 2, message = "Preço não válido")
+		double preco
+
+) {}
