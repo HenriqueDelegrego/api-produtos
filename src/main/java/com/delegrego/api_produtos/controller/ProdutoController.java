@@ -34,8 +34,8 @@ public class ProdutoController {
 
 	// Create
 	@PostMapping
-	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody ProdutoRequest p) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(p));
+	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody ProdutoRequest produto) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(produto));
 	}
 
 	// Read
@@ -52,8 +52,8 @@ public class ProdutoController {
 
 	// Update
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest p) {
-		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, p));
+	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest produto) {
+		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
 	}
 
 	// Delete

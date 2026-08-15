@@ -15,47 +15,46 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProdutoService {
 
-	// Injeta automaticamente a interface de repositório que acessa o banco de dados
-
-	private final ProdutoRepository repo;
+	private final ProdutoRepository repository;
 
 	// Create
-	public Produto inserirProduto(ProdutoRequest p) {
+	public Produto inserirProduto(ProdutoRequest produtoDto) {
 
-		Produto produto = new Produto();
-		produto.setNome(p.nome());
-		produto.setPreco(p.preco());
+		Produto produtoEntity = new Produto();
+		produtoEntity.setNome(produtoDto.nome());
+		produtoEntity.setPreco(produtoDto.preco());
 
 		// Insere um produto no banco de dados
-		return repo.save(produto);
+		return repository.save(produtoEntity);
 	}
 
 	// Read
 	public List<Produto> listarProdutos() {
 		// Lista todos os produtos
-		return repo.findAll();
+		return repository.findAll();
 	}
 
 	public Produto obterProdutoPorId(int id) {
-		return repo.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		return repository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 	}
 
 	// Update
-	public Produto atualizarProduto(int id, ProdutoRequest p) {
+	public Produto atualizarProduto(int id, ProdutoRequest produtoDto) {
 
-		Produto produto = new Produto();
-		produto.setId(repo.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado")).getId());
-		produto.setNome(p.nome());
-		produto.setPreco(p.preco());
+		Produto produtoEntity = new Produto();
+		produtoEntity.setId(repository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Produto não encontrado")).getId());
+		produtoEntity.setNome(produtoDto.nome());
+		produtoEntity.setPreco(produtoDto.preco());
 
 		// Atualiza um produto
-		return repo.save(produto);
+		return repository.save(produtoEntity);
 	}
 
 	// Delete
 	public void deletarProduto(int id) {
 		// Deleta um produto a partir do id
-		repo.deleteById(id);
+		repository.deleteById(id);
 	}
 
 }
