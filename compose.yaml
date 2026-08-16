@@ -18,7 +18,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: produtos
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot" ]
+      test: [ "CMD", "mysql", "-u", "root", "-e", "USE produtos;" ]
       interval: 10s
       timeout: 5s
       retries: 5
