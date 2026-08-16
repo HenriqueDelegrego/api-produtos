@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.delegrego.api_produtos.dto.ProdutoRequest;
 import com.delegrego.api_produtos.entity.Produto;
+import com.delegrego.api_produtos.exception.ProdutoNotFoundException;
 import com.delegrego.api_produtos.repository.ProdutoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class ProdutoService {
 	}
 
 	public Produto obterProdutoPorId(int id) {
-		return repository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		return repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
 	}
 
 	// Update
@@ -43,7 +44,7 @@ public class ProdutoService {
 
 		Produto produtoEntity = new Produto();
 		produtoEntity.setId(repository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Produto não encontrado")).getId());
+				.orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado")).getId());
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
 
