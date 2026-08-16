@@ -1,5 +1,5 @@
 # Imagem base com Maven para compilar o projeto Java
-FROM maven AS builder
+FROM maven:3.9.11-eclipse-temurin-25-alpine AS builder
 
 # Define o diretório de trabalho dentro do container
 WORKDIR /app
@@ -11,10 +11,10 @@ COPY pom.xml .
 COPY src ./src
 
 # Executa o build da aplicação e gera o arquivo .jar
-RUN mvn clean package -DskipTests
+RUN mvn package -DskipTests
 
 # Segunda etapa: imagem mais leve apenas para execução
-FROM eclipse-temurin
+FROM eclipse-temurin:25-jre-alpine
 
 # Define o diretório de trabalho da aplicação
 WORKDIR /app
