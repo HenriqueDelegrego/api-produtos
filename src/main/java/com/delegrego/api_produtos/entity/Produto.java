@@ -24,7 +24,6 @@ public class Produto {
 
 	// Define o campo 'id' como a chave primária da tabela
 	@Id
-
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// Mapeia o campo 'id' para a coluna 'id' no banco de dados
 	@Column(name = "id")
@@ -35,5 +34,8 @@ public class Produto {
 
 	@Column(name = "preco", precision = 2, nullable = false)
 	private double preco;
+
+	@Column(name = "url_imagem", nullable = false)
+	private String urlImagem;
 
 }

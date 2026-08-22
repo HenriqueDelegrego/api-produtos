@@ -13,6 +13,9 @@ public record ProdutoRequest(
 
 		@PositiveOrZero(message = "Preço não pode ser negativo")
 		@Digits(integer = 10, fraction = 2, message = "Preço não válido")
-		double preco
+		double preco,
+
+		@NotBlank
+		String urlImagem
 
 ) {}

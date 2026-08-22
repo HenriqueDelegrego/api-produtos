@@ -24,6 +24,7 @@ public class ProdutoService {
 		Produto produtoEntity = new Produto();
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
+		produtoEntity.setUrlImagem(produtoDto.urlImagem());
 
 		// Insere um produto no banco de dados
 		return repository.save(produtoEntity);
@@ -47,6 +48,7 @@ public class ProdutoService {
 				.orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado")).getId());
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
+		produtoEntity.setUrlImagem(produtoDto.urlImagem());
 
 		// Atualiza um produto
 		return repository.save(produtoEntity);
