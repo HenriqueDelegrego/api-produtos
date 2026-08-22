@@ -24,7 +24,6 @@ public class Produto {
 
 	// Define o campo 'id' como a chave primária da tabela
 	@Id
-
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	// Mapeia o campo 'id' para a coluna 'id' no banco de dados
 	@Column(name = "id")
