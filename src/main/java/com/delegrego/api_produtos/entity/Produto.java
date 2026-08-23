@@ -35,7 +35,7 @@ public class Produto {
 	@Column(name = "preco", precision = 2, nullable = false)
 	private double preco;
 
-	@Column(name = "url_imagem", nullable = false)
+	@Column(name = "url_imagem", columnDefinition = "TEXT", nullable = false)
 	private String urlImagem;
 
 }
