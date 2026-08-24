@@ -15,7 +15,7 @@ public record ProdutoRequest(
 		@Digits(integer = 10, fraction = 2, message = "Preço não válido")
 		double preco,
 
-		@NotBlank
+		@NotBlank(message = "Url da imagem é obrigatória")
 		String urlImagem
 
 ) {}
