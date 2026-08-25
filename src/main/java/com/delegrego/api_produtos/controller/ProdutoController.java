@@ -33,18 +33,21 @@ public class ProdutoController {
 	private final ProdutoService servico;
 
 	// Create
+	// Categoria nos produtos?
 	@PostMapping
 	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(produto));
 	}
 
 	// Read
+	// TODO: Paginação
 	@GetMapping
 	public ResponseEntity<List<Produto>> listarProdutos() {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos());
 	}
 
 	// Read by id
+	// TODO: Get por id com descrição
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> obterProdutoPorId(@PathVariable int id) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
