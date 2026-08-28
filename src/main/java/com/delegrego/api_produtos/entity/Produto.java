@@ -11,10 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-// Indica que esta classe é uma entidade JPA
 @Entity
-
-// Define o nome da tabela no banco de dados que esta entidade representa
 @Table(name = "produto")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,10 +19,8 @@ import lombok.Setter;
 @Setter
 public class Produto {
 
-	// Define o campo 'id' como a chave primária da tabela
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	// Mapeia o campo 'id' para a coluna 'id' no banco de dados
 	@Column(name = "id")
 	private int id;
 

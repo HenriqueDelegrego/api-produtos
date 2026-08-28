@@ -11,28 +11,22 @@ import com.delegrego.api_produtos.repository.ProdutoRepository;
 
 import lombok.RequiredArgsConstructor;
 
-//Indica que esta classe é um serviço do Spring (camada de lógica de negócio)
 @Service
 @RequiredArgsConstructor
 public class ProdutoService {
 
 	private final ProdutoRepository repository;
 
-	// Create
 	public Produto inserirProduto(ProdutoRequest produtoDto) {
 
 		Produto produtoEntity = new Produto();
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
 		produtoEntity.setUrlImagem(produtoDto.urlImagem());
-
-		// Insere um produto no banco de dados
 		return repository.save(produtoEntity);
 	}
 
-	// Read
 	public List<Produto> listarProdutos() {
-		// Lista todos os produtos
 		return repository.findAll();
 	}
 
@@ -40,7 +34,6 @@ public class ProdutoService {
 		return repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
 	}
 
-	// Update
 	public Produto atualizarProduto(int id, ProdutoRequest produtoDto) {
 
 		Produto produtoEntity = new Produto();
@@ -50,13 +43,10 @@ public class ProdutoService {
 		produtoEntity.setPreco(produtoDto.preco());
 		produtoEntity.setUrlImagem(produtoDto.urlImagem());
 
-		// Atualiza um produto
 		return repository.save(produtoEntity);
 	}
 
-	// Delete
 	public void deletarProduto(int id) {
-		// Deleta um produto a partir do id
 		repository.deleteById(id);
 	}
 

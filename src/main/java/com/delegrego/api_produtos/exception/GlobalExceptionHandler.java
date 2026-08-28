@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
+// TODO: Retornar json em vez de String?
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ProdutoNotFoundException.class)

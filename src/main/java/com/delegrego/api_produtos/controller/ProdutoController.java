@@ -21,10 +21,7 @@ import com.delegrego.api_produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
-//Define esta classe como um controller REST, ou seja, que responde a requisições HTTP com JSON
 @RestController
-
-//Permite requisições de outras origens
 @CrossOrigin
 @RequestMapping("/produtos")
 @RequiredArgsConstructor
@@ -32,34 +29,29 @@ public class ProdutoController {
 
 	private final ProdutoService servico;
 
-	// Create
-	// Categoria nos produtos?
+	// TODO: Categoria nos produtos?
 	@PostMapping
 	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(produto));
 	}
 
-	// Read
 	// TODO: Paginação
 	@GetMapping
 	public ResponseEntity<List<Produto>> listarProdutos() {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos());
 	}
 
-	// Read by id
 	// TODO: Get por id com descrição
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> obterProdutoPorId(@PathVariable int id) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
 	}
 
-	// Update
 	@PutMapping("/{id}")
 	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
 	}
 
-	// Delete
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarProduto(@PathVariable int id) {
 		servico.deletarProduto(id);
