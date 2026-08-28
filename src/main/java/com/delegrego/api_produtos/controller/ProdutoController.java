@@ -47,6 +47,7 @@ public class ProdutoController {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
 	}
 
+	// TODO: Pesquisa parcial
 	@PutMapping("/{id}")
 	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
