@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.delegrego.api_produtos.dto.ProdutoRequest;
@@ -47,7 +48,11 @@ public class ProdutoController {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
 	}
 
-	// TODO: Pesquisa parcial
+	@GetMapping()
+	public ResponseEntity<List<Produto>> listarProdutosPorNome(@RequestParam String nome) {
+		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutosPorNome(nome));
+	}
+
 	@PutMapping("/{id}")
 	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
@@ -57,6 +62,5 @@ public class ProdutoController {
 	public ResponseEntity<Void> deletarProduto(@PathVariable int id) {
 		servico.deletarProduto(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-
 	}
 }
