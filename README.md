@@ -381,52 +381,6 @@ Produto não encontrado
 - A listagem por nome usa busca parcial, sem diferenciação entre maiúsculas/minúsculas.
 - A API está pronta para consumo por aplicações web com `fetch`, `axios` ou qualquer cliente HTTP.
 
-## Exemplos de consumo em JavaScript
-
-### Fetch: cadastrar produto
-
-```javascript
-const produto = {
-  nome: 'Câmera Digital',
-  descricao: 'Câmera mirrorless 24MP',
-  preco: 2499.9,
-  urlImagem: 'https://images.example.com/camera.jpg'
-};
-
-fetch('http://localhost:8080/produtos', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(produto)
-})
-  .then(async (response) => {
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data || 'Erro ao criar produto');
-    }
-    return data;
-  })
-  .then((produtoCriado) => console.log(produtoCriado))
-  .catch((error) => console.error(error));
-```
-
-### Fetch: listar produtos
-
-```javascript
-fetch('http://localhost:8080/produtos')
-  .then((response) => response.json())
-  .then((produtos) => console.log(produtos));
-```
-
-### Fetch: buscar produto por ID
-
-```javascript
-fetch('http://localhost:8080/produtos/1')
-  .then((response) => response.json())
-  .then((produto) => console.log(produto));
-```
-
 ## Estrutura do projeto
 
 ```text
@@ -464,5 +418,3 @@ api-produtos/
 | `GET` | `/produtos/{id}` | Busca um produto pelo ID |
 | `PUT` | `/produtos/{id}` | Atualiza um produto |
 | `DELETE` | `/produtos/{id}` | Remove um produto |
-
-Se quiser, também posso criar uma segunda versão do README em formato mais enxuto, voltado para equipe de front-end com exemplos em React/Next.js ou em Axios.
