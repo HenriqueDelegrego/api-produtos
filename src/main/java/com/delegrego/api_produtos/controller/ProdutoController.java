@@ -36,7 +36,6 @@ public class ProdutoController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(produto));
 	}
 
-	// TODO: Paginação
 	@GetMapping
 	public ResponseEntity<List<Produto>> listarProdutos(@RequestParam(required = false) String nome) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos(nome));
