@@ -23,11 +23,14 @@ public class ProdutoService {
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
 		produtoEntity.setUrlImagem(produtoDto.urlImagem());
+		produtoEntity.setDescricao(produtoDto.descricao());
+
 		return repository.save(produtoEntity);
 	}
 
 	public List<Produto> listarProdutos(String nome) {
-		return nome == null || nome.isBlank() ? repository.findAll() : repository.findByNomeContainingIgnoreCase(nome.strip());
+		return nome == null || nome.isBlank() ? repository.findAll()
+				: repository.findByNomeContainingIgnoreCase(nome.strip());
 	}
 
 	public Produto obterProdutoPorId(int id) {
@@ -46,6 +49,7 @@ public class ProdutoService {
 		produtoEntity.setNome(produtoDto.nome());
 		produtoEntity.setPreco(produtoDto.preco());
 		produtoEntity.setUrlImagem(produtoDto.urlImagem());
+		produtoEntity.setDescricao(produtoDto.descricao());
 
 		return repository.save(produtoEntity);
 	}

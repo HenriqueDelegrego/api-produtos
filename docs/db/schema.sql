@@ -5,6 +5,7 @@ USE produtos;
 CREATE TABLE IF NOT EXISTS produto (
 	id INT AUTO_INCREMENT,
 	nome VARCHAR(50) NOT NULL,
+	descricao TEXT NOT NULL,
 	preco DECIMAL(10,2) NOT NULL,
 	url_imagem TEXT NOT NULL,
 	PRIMARY KEY(id)
