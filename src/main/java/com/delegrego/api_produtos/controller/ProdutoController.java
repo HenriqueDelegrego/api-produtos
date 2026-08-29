@@ -38,19 +38,14 @@ public class ProdutoController {
 
 	// TODO: Paginação
 	@GetMapping
-	public ResponseEntity<List<Produto>> listarProdutos() {
-		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos());
+	public ResponseEntity<List<Produto>> listarProdutos(@RequestParam(required = false) String nome) {
+		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos(nome));
 	}
 
 	// TODO: Get por id com descrição
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto> obterProdutoPorId(@PathVariable int id) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
-	}
-
-	@GetMapping()
-	public ResponseEntity<List<Produto>> listarProdutosPorNome(@RequestParam String nome) {
-		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutosPorNome(nome));
 	}
 
 	@PutMapping("/{id}")
