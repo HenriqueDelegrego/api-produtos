@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.delegrego.api_produtos.dto.ProdutoListResponse;
 import com.delegrego.api_produtos.dto.ProdutoRequest;
-import com.delegrego.api_produtos.entity.Produto;
+import com.delegrego.api_produtos.dto.ProdutoResponse;
 import com.delegrego.api_produtos.service.ProdutoService;
 
 import jakarta.validation.Valid;
@@ -32,23 +33,23 @@ public class ProdutoController {
 
 	// TODO: Categoria nos produtos?
 	@PostMapping
-	public ResponseEntity<Produto> inserirProduto(@Valid @RequestBody ProdutoRequest produto) {
+	public ResponseEntity<ProdutoResponse> inserirProduto(@Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(servico.inserirProduto(produto));
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Produto>> listarProdutos(@RequestParam(required = false) String nome) {
+	public ResponseEntity<List<ProdutoListResponse>> listarProdutos(@RequestParam(required = false) String nome) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos(nome));
 	}
 
-	// TODO: Get por id com descrição
 	@GetMapping("/{id}")
-	public ResponseEntity<Produto> obterProdutoPorId(@PathVariable int id) {
+	public ResponseEntity<ProdutoResponse> obterProdutoPorId(@PathVariable int id) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> atualizarProduto(@PathVariable int id, @Valid @RequestBody ProdutoRequest produto) {
+	public ResponseEntity<ProdutoResponse> atualizarProduto(@PathVariable int id,
+			@Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
 	}
 

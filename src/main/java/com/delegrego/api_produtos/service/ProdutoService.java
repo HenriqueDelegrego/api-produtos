@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.delegrego.api_produtos.dto.ProdutoListResponse;
 import com.delegrego.api_produtos.dto.ProdutoRequest;
+import com.delegrego.api_produtos.dto.ProdutoResponse;
 import com.delegrego.api_produtos.entity.Produto;
 import com.delegrego.api_produtos.exception.ProdutoNotFoundException;
+import com.delegrego.api_produtos.mapper.ProdutoMapper;
 import com.delegrego.api_produtos.repository.ProdutoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -16,38 +19,30 @@ import lombok.RequiredArgsConstructor;
 public class ProdutoService {
 
 	private final ProdutoRepository repository;
+	private final ProdutoMapper mapper;
 
-	public Produto inserirProduto(ProdutoRequest produtoDto) {
-
-		Produto produtoEntity = new Produto();
-		produtoEntity.setNome(produtoDto.nome());
-		produtoEntity.setPreco(produtoDto.preco());
-		produtoEntity.setUrlImagem(produtoDto.urlImagem());
-		produtoEntity.setDescricao(produtoDto.descricao());
-
-		return repository.save(produtoEntity);
+	public ProdutoResponse inserirProduto(ProdutoRequest produtoDto) {
+		return mapper.toResponse(repository.save(mapper.toEntity(produtoDto)));
 	}
 
-	public List<Produto> listarProdutos(String nome) {
-		return nome == null || nome.isBlank() ? repository.findAll()
-				: repository.findByNomeContainingIgnoreCase(nome.strip());
+	public List<ProdutoListResponse> listarProdutos(String nome) {
+		return nome == null || nome.isBlank() ? mapper.toListResponse(repository.findAll())
+				: mapper.toListResponse(repository.findByNomeContainingIgnoreCase(nome.strip()));
 	}
 
-	public Produto obterProdutoPorId(int id) {
-		return repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
+	public ProdutoResponse obterProdutoPorId(int id) {
+		return mapper.toResponse(
+				repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado")));
 	}
 
-	public Produto atualizarProduto(int id, ProdutoRequest produtoDto) {
+	public ProdutoResponse atualizarProduto(int id, ProdutoRequest produtoDto) {
 
-		Produto produtoEntity = new Produto();
-		produtoEntity.setId(repository.findById(id)
-				.orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado")).getId());
-		produtoEntity.setNome(produtoDto.nome());
-		produtoEntity.setPreco(produtoDto.preco());
-		produtoEntity.setUrlImagem(produtoDto.urlImagem());
-		produtoEntity.setDescricao(produtoDto.descricao());
+		Produto produtoEntity = repository.findById(id)
+				.orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
 
-		return repository.save(produtoEntity);
+		mapper.updateEntityFromDto(produtoDto, produtoEntity);
+
+		return mapper.toResponse(repository.save(produtoEntity));
 	}
 
 	public void deletarProduto(int id) {
