@@ -11,6 +11,9 @@ public record ProdutoRequest(
 		@Size(max = 50, message = "Nome não pode ultrapassar 50 caracteres")
 		String nome,
 
+		@NotBlank(message = "Descrição é obrigatória")
+		String descricao,
+
 		@PositiveOrZero(message = "Preço não pode ser negativo")
 		@Digits(integer = 10, fraction = 2, message = "Preço não válido")
 		double preco,
