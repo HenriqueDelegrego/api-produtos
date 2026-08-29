@@ -33,6 +33,8 @@ public class Produto {
 	@Column(name = "preco", precision = 2, nullable = false)
 	private double preco;
 
+	// TODO: Desconto
+
 	@Column(name = "url_imagem", columnDefinition = "TEXT", nullable = false)
 	private String urlImagem;
 
