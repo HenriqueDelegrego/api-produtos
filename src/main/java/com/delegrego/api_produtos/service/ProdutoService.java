@@ -26,12 +26,16 @@ public class ProdutoService {
 		return repository.save(produtoEntity);
 	}
 
-	public List<Produto> listarProdutos() {
-		return repository.findAll();
+	public List<Produto> listarProdutos(String nome) {
+		return nome == null || nome.isBlank() ? repository.findAll() : repository.findByNomeContainingIgnoreCase(nome.strip());
 	}
 
 	public Produto obterProdutoPorId(int id) {
 		return repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
+	}
+
+	public List<Produto> listarProdutosPorNome(String nome) {
+		return repository.findByNomeContainingIgnoreCase(nome);
 	}
 
 	public Produto atualizarProduto(int id, ProdutoRequest produtoDto) {
