@@ -37,10 +37,6 @@ public class ProdutoService {
 		return repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
 	}
 
-	public List<Produto> listarProdutosPorNome(String nome) {
-		return repository.findByNomeContainingIgnoreCase(nome);
-	}
-
 	public Produto atualizarProduto(int id, ProdutoRequest produtoDto) {
 
 		Produto produtoEntity = new Produto();
