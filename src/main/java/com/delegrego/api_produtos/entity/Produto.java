@@ -27,6 +27,9 @@ public class Produto {
 	@Column(name = "nome", length = 50, nullable = false)
 	private String nome;
 
+	@Column(name = "descricao", columnDefinition = "TEXT", nullable = false)
+	private String descricao;
+
 	@Column(name = "preco", precision = 2, nullable = false)
 	private double preco;
 
