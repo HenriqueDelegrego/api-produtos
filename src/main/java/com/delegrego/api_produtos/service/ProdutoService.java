@@ -25,9 +25,25 @@ public class ProdutoService {
 		return mapper.toResponse(repository.save(mapper.toEntity(produtoDto)));
 	}
 
-	public List<ProdutoListResponse> listarProdutos(String nome) {
-		return nome == null || nome.isBlank() ? mapper.toListResponse(repository.findAll())
-				: mapper.toListResponse(repository.findByNomeContainingIgnoreCase(nome.strip()));
+	public List<ProdutoListResponse> listarProdutos(String nome, String descricao) {
+
+		boolean nomeValido = nome != null && !nome.isBlank();
+		boolean descricaoValida = descricao != null && !descricao.isBlank();
+
+		if (!nomeValido && !descricaoValida) {
+			return mapper.toListResponse(repository.findAll());
+		}
+
+		if (nomeValido && !descricaoValida) {
+			return mapper.toListResponse(repository.findByNomeContainingIgnoreCase(nome));
+		}
+
+		if (!nomeValido) {
+			return mapper.toListResponse(repository.findByDescricaoContainingIgnoreCase(descricao));
+		}
+
+		return mapper.toListResponse(
+				repository.findByNomeContainingIgnoreCaseOrDescricaoContainingIgnoreCase(nome, descricao));
 	}
 
 	public ProdutoResponse obterProdutoPorId(int id) {
