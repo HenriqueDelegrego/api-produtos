@@ -38,8 +38,9 @@ public class ProdutoController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<ProdutoListResponse>> listarProdutos(@RequestParam(required = false) String nome) {
-		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos(nome));
+	public ResponseEntity<List<ProdutoListResponse>> listarProdutos(@RequestParam(required = false) String nome,
+			@RequestParam(required = false) String descricao) {
+		return ResponseEntity.status(HttpStatus.OK).body(servico.listarProdutos(nome, descricao));
 	}
 
 	@GetMapping("/{id}")
