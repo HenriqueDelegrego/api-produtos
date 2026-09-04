@@ -43,7 +43,7 @@ public class ProdutoService {
 		}
 
 		return mapper.toListResponse(
-				repository.findByNomeContainingIgnoreCaseOrDescricaoContainingIgnoreCase(nome, descricao));
+				repository.findByNomeContainingIgnoreCaseAndDescricaoContainingIgnoreCase(nome, descricao));
 	}
 
 	public ProdutoResponse obterProdutoPorId(int id) {

@@ -8,7 +8,7 @@ import com.delegrego.api_produtos.entity.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-	List<Produto> findByNomeContainingIgnoreCaseOrDescricaoContainingIgnoreCase(String nome, String descricao);
+	List<Produto> findByNomeContainingIgnoreCaseAndDescricaoContainingIgnoreCase(String nome, String descricao);
 
 	List<Produto> findByNomeContainingIgnoreCase(String nome);
 
