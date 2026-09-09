@@ -160,7 +160,7 @@ Status: `201 Created`
 
 `GET /produtos`
 
-Lista todos os produtos. Também aceita filtro por nome.
+Lista todos os produtos. Também aceita filtro por nome e descrição.
 
 #### Consulta
 
@@ -173,6 +173,12 @@ GET /produtos?nome=notebook
 ```
 
 - `nome` (opcional): filtro parcial, case-insensitive
+
+```http
+GET /produtos?descricao=i7
+```
+
+- `descricao` (opcional): filtro parcial, case-insensitive
 
 #### Resposta de sucesso
 
