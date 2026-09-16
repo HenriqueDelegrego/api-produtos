@@ -14,7 +14,7 @@ public class ProdutoRepositoryTest {
 	private ProdutoRepository repository;
 
 	@Test
-	void saveAndFindById() {
+	void Save_ValidData_ReturnsProduct() {
 		Produto produto = new Produto();
 		produto.setNome("Caneta");
 		produto.setDescricao("Azul");
