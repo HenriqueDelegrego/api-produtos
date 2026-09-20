@@ -1,5 +1,7 @@
 package com.delegrego.api_produtos.dto;
 
+import java.math.BigDecimal;
+
 public record ProdutoResponse(
 		
 		int id,
@@ -8,7 +10,7 @@ public record ProdutoResponse(
 		
 		String descricao,
 
-		double preco,
+		BigDecimal preco,
 
 		String urlImagem
 		

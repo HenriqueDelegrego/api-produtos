@@ -1,7 +1,10 @@
 package com.delegrego.api_produtos.dto;
 
+import java.math.BigDecimal;
+
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
@@ -14,9 +17,10 @@ public record ProdutoRequest(
 		@NotBlank(message = "Descrição é obrigatória")
 		String descricao,
 
+		@NotNull
 		@PositiveOrZero(message = "Preço não pode ser negativo")
 		@Digits(integer = 10, fraction = 2, message = "Preço não válido")
-		double preco,
+		BigDecimal preco,
 
 		@NotBlank(message = "Url da imagem é obrigatória")
 		String urlImagem
