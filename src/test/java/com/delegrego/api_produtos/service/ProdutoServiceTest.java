@@ -23,7 +23,7 @@ public class ProdutoServiceTest {
 	public void create_savesAndReturnsUser() {
 		ProdutoRequest request = new ProdutoRequest("Caneta", "Azul", 2, "a");
 
-		Produto saved = new Produto(1, "Caneta", "Azul", 2, "a");
+	//	Produto saved = new Produto(1, "Caneta", "Azul", 2, "a");
 		
 		// when(repository.save(request).then)
 	}
