@@ -21,7 +21,7 @@ public class ProdutoServiceTest {
 
 	@Test
 	public void create_savesAndReturnsUser() {
-		ProdutoRequest request = new ProdutoRequest("Caneta", "Azul", 2, "a");
+		// ProdutoRequest request = new ProdutoRequest("Caneta", "Azul", 2, "a");
 
 	//	Produto saved = new Produto(1, "Caneta", "Azul", 2, "a");
 		
