@@ -59,7 +59,7 @@ public class ProdutoRepositoryTest {
 		List<Produto> listaProdutos = repository.findAll();
 
 		// Assert
-		Assertions.assertThat(listaProdutos).hasSize(2).containsExactlyInAnyOrder(produto, produto2);
+		Assertions.assertThat(listaProdutos).containsExactlyInAnyOrder(produto, produto2);
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class ProdutoRepositoryTest {
 		List<Produto> produtosRetornados = repository.findByNomeContainingIgnoreCase("Canet");
 
 		// Assert
-		Assertions.assertThat(produtosRetornados).hasSize(2).containsExactlyInAnyOrder(produto, produto3);
+		Assertions.assertThat(produtosRetornados).containsExactlyInAnyOrder(produto, produto3);
 	}
 
 	@Test
