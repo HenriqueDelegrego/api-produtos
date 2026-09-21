@@ -1,33 +1,32 @@
 package com.delegrego.api_produtos.exception;
 
-import java.util.stream.Collectors;
+import java.time.Instant;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-// TODO: Retornar json em vez de String?
 public class GlobalExceptionHandler {
 
 	@ExceptionHandler(ProdutoNotFoundException.class)
-	public ResponseEntity<String> handleProdutoNotFound(ProdutoNotFoundException ex) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	public ResponseEntity<ErrorResponse> handleProdutoNotFound(ProdutoNotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(404, ex.getMessage(), Instant.now()));
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<String> handleValidation(MethodArgumentNotValidException ex) {
+	public ResponseEntity<FieldErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
 
-		String message = ex.getBindingResult()
-				.getFieldErrors()
-				.stream()
-				.map(FieldError::getDefaultMessage)
-				.collect(Collectors.joining("\n"));
+		List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors().stream()
+				.map(error -> new FieldError(error.getField(), error.getDefaultMessage())).toList();
 
-		return ResponseEntity.badRequest().body(message);
+		FieldErrorResponse response = new FieldErrorResponse(400, "Request validation failed", Instant.now(),
+				fieldErrors);
+
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	}
 
 }
