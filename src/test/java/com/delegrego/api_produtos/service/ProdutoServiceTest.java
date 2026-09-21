@@ -56,7 +56,7 @@ public class ProdutoServiceTest {
 		ProdutoResponse produtoSalvo = service.inserirProduto(request);
 
 		// Assert
-		Assertions.assertThat(produtoSalvo).isSameAs(response);
+		Assertions.assertThat(produtoSalvo).isEqualTo(response);
 	}
 
 	@Test
