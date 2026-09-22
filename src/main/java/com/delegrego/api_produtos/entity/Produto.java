@@ -1,5 +1,7 @@
 package com.delegrego.api_produtos.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "produto")
@@ -17,6 +20,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Produto {
 
 	@Id
@@ -30,8 +34,8 @@ public class Produto {
 	@Column(name = "descricao", columnDefinition = "TEXT", nullable = false)
 	private String descricao;
 
-	@Column(name = "preco", precision = 2, nullable = false)
-	private double preco;
+	@Column(name = "preco", precision = 10, scale = 2, nullable = false)
+	private BigDecimal preco;
 
 	// TODO: Desconto
 
