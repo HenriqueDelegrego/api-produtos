@@ -45,6 +45,7 @@ public class ProdutoServiceTest {
 		ProdutoResponse response = new ProdutoResponse(null, produto.getNome(), produto.getDescricao(),
 				produto.getPreco(), produto.getUrlImagem());
 
+		// Mocking
 		Mockito.when(mapper.toEntity(request)).thenReturn(produto);
 
 		Mockito.when(repository.save(produto)).thenReturn(produto);
