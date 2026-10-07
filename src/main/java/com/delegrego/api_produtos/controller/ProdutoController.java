@@ -44,18 +44,18 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ProdutoResponse> obterProdutoPorId(@PathVariable int id) {
+	public ResponseEntity<ProdutoResponse> obterProdutoPorId(@PathVariable Long id) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.obterProdutoPorId(id));
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ProdutoResponse> atualizarProduto(@PathVariable int id,
+	public ResponseEntity<ProdutoResponse> atualizarProduto(@PathVariable Long id,
 			@Valid @RequestBody ProdutoRequest produto) {
 		return ResponseEntity.status(HttpStatus.OK).body(servico.atualizarProduto(id, produto));
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deletarProduto(@PathVariable int id) {
+	public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
 		servico.deletarProduto(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}

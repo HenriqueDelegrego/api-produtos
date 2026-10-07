@@ -42,7 +42,7 @@ public class ProdutoServiceTest {
 
 		ProdutoRequest request = new ProdutoRequest("Caneta", "Azul", new BigDecimal("2.00"), "a");
 
-		ProdutoResponse response = new ProdutoResponse(produto.getId(), produto.getNome(), produto.getDescricao(),
+		ProdutoResponse response = new ProdutoResponse(null, produto.getNome(), produto.getDescricao(),
 				produto.getPreco(), produto.getUrlImagem());
 
 		Mockito.when(mapper.toEntity(request)).thenReturn(produto);

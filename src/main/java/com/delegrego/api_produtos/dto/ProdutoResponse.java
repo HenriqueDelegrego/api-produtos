@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public record ProdutoResponse(
 		
-		int id,
+		Long id,
 
 		String nome,
 		
