@@ -2,6 +2,7 @@ package com.delegrego.api_produtos.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -123,6 +124,36 @@ public class ProdutoServiceTest {
 
 		// Assert
 		Assertions.assertThat(listaProdutos).containsExactlyInAnyOrder(response1, response2);
+	}
+
+	@Test
+	void deveListarProdutoPorId() {
+
+		// Arrange
+		Produto produto = new Produto();
+		produto.setId(1L);
+		produto.setNome("Caneta");
+		produto.setDescricao("Azul");
+		produto.setPreco(new BigDecimal("2.00"));
+		produto.setUrlImagem("a");
+
+		ProdutoResponse response = new ProdutoResponse(1L, produto.getNome(), produto.getDescricao(),
+				produto.getPreco(), produto.getUrlImagem());
+
+		// Stub
+		Mockito.when(repository.findById(1L)).thenReturn(Optional.of(produto));
+		Mockito.when(mapper.toResponse(produto)).thenReturn(response);
+
+		// Act
+		ProdutoResponse produtoPorId = service.obterProdutoPorId(1L);
+
+		// Verify
+		Mockito.verify(repository).findById(1L);
+		Mockito.verify(mapper).toResponse(produto);
+
+		// Assert
+		Assertions.assertThat(produtoPorId).isNotNull().isEqualTo(response);
+
 	}
 
 }
