@@ -46,12 +46,12 @@ public class ProdutoService {
 				repository.findByNomeContainingIgnoreCaseAndDescricaoContainingIgnoreCase(nome, descricao));
 	}
 
-	public ProdutoResponse obterProdutoPorId(int id) {
+	public ProdutoResponse obterProdutoPorId(Long id) {
 		return mapper.toResponse(
 				repository.findById(id).orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado")));
 	}
 
-	public ProdutoResponse atualizarProduto(int id, ProdutoRequest produtoDto) {
+	public ProdutoResponse atualizarProduto(Long id, ProdutoRequest produtoDto) {
 
 		Produto produtoEntity = repository.findById(id)
 				.orElseThrow(() -> new ProdutoNotFoundException("Produto não encontrado"));
@@ -61,7 +61,7 @@ public class ProdutoService {
 		return mapper.toResponse(repository.save(produtoEntity));
 	}
 
-	public void deletarProduto(int id) {
+	public void deletarProduto(Long id) {
 		repository.deleteById(id);
 	}
 
