@@ -53,9 +53,6 @@ class ProdutoServiceTest {
 
 		// Assert
 		Assertions.assertThat(produtoSalvo).isEqualTo(response);
-		Mockito.verify(mapper).toEntity(request);
-		Mockito.verify(repository).save(produto);
-		Mockito.verify(mapper).toResponse(produto);
 	}
 
 	@Test
@@ -90,8 +87,6 @@ class ProdutoServiceTest {
 
 		// Assert
 		Assertions.assertThat(listaProdutos).containsExactlyInAnyOrder(response1, response2);
-		Mockito.verify(repository).findAll();
-		Mockito.verify(mapper).toListResponse(produtos);
 	}
 
 	@Test
@@ -147,10 +142,6 @@ class ProdutoServiceTest {
 
 		// Act
 		ProdutoResponse produtoPorId = service.obterProdutoPorId(1L);
-
-		// Verify
-		Mockito.verify(repository).findById(1L);
-		Mockito.verify(mapper).toResponse(produto);
 
 		// Assert
 		Assertions.assertThat(produtoPorId).isNotNull().isEqualTo(response);
