@@ -20,7 +20,7 @@ import com.delegrego.api_produtos.mapper.ProdutoMapper;
 import com.delegrego.api_produtos.repository.ProdutoRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ProdutoServiceTest {
+class ProdutoServiceTest {
 
 	@Mock
 	private ProdutoRepository repository;
@@ -32,26 +32,21 @@ public class ProdutoServiceTest {
 	private ProdutoService service;
 
 	@Test
-	void deveSalvarERetornarProdutoQuandoDadosForemValidos() {
+	void deveSalvarERetornarProduto() {
 
 		// Arrange
-		Produto produto = new Produto();
-		produto.setNome("Caneta");
-		produto.setDescricao("Azul");
-		produto.setPreco(new BigDecimal("2.00"));
-		produto.setUrlImagem("a");
-
 		ProdutoRequest request = new ProdutoRequest("Caneta", "Azul", new BigDecimal("2.00"), "a");
 
-		ProdutoResponse response = new ProdutoResponse(null, produto.getNome(), produto.getDescricao(),
-				produto.getPreco(), produto.getUrlImagem());
+		Produto produto = new Produto(1L, request.nome(), request.descricao(), request.preco(), request.urlImagem());
 
-		// Mocking
-		Mockito.when(mapper.toEntity(request)).thenReturn(produto);
+		Mockito.when(mapper.toEntity(Mockito.any(ProdutoRequest.class))).thenReturn(produto);
 
-		Mockito.when(repository.save(produto)).thenReturn(produto);
+		Mockito.when(repository.save(Mockito.any(Produto.class))).thenReturn(produto);
 
-		Mockito.when(mapper.toResponse(produto)).thenReturn(response);
+		ProdutoResponse response = new ProdutoResponse(1L, request.nome(), request.descricao(), request.preco(),
+				request.urlImagem());
+
+		Mockito.when(mapper.toResponse(Mockito.any(Produto.class))).thenReturn(response);
 
 		// Act
 		ProdutoResponse produtoSalvo = service.inserirProduto(request);
@@ -61,7 +56,7 @@ public class ProdutoServiceTest {
 	}
 
 	@Test
-	void deveListarProdutosQuandoExistemProdutos() {
+	void deveListarTodosOsProdutos() {
 
 		// Arrange
 		Produto produto = new Produto();
