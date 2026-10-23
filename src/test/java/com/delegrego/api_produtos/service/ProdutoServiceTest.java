@@ -53,17 +53,25 @@ class ProdutoServiceTest {
 
 		// Assert
 		Assertions.assertThat(produtoSalvo).isEqualTo(response);
+		Mockito.verify(mapper).toEntity(request);
+		Mockito.verify(repository).save(produto);
+		Mockito.verify(mapper).toResponse(produto);
 	}
 
 	@Test
 	void deveListarTodosOsProdutos() {
 
 		// Arrange
-		Produto produto = new Produto();
-		produto.setNome("Caneta");
-		produto.setDescricao("Azul");
-		produto.setPreco(new BigDecimal("2.00"));
-		produto.setUrlImagem("a");
+		ProdutoListResponse response1 = new ProdutoListResponse(1L, "Caneta", new BigDecimal("2.00"), "a");
+		ProdutoListResponse response2 = new ProdutoListResponse(2L, "Lápis", new BigDecimal("2.00"), "a");
+
+		List<ProdutoListResponse> produtosResponse = List.of(response1, response2);
+
+		Produto produto1 = new Produto();
+		produto1.setNome("Caneta");
+		produto1.setDescricao("Azul");
+		produto1.setPreco(new BigDecimal("2.00"));
+		produto1.setUrlImagem("a");
 
 		Produto produto2 = new Produto();
 		produto2.setNome("Lápis");
@@ -71,21 +79,19 @@ class ProdutoServiceTest {
 		produto2.setPreco(new BigDecimal("2.00"));
 		produto2.setUrlImagem("a");
 
-		ProdutoListResponse response1 = new ProdutoListResponse(produto.getId(), produto.getNome(), produto.getPreco(),
-				produto.getUrlImagem());
+		List<Produto> produtos = List.of(produto1, produto2);
 
-		ProdutoListResponse response2 = new ProdutoListResponse(produto2.getId(), produto2.getNome(),
-				produto2.getPreco(), produto2.getUrlImagem());
+		Mockito.when(repository.findAll()).thenReturn(produtos);
 
-		Mockito.when(repository.findAll()).thenReturn(List.of(produto, produto2));
-
-		Mockito.when(mapper.toListResponse(List.of(produto, produto2))).thenReturn(List.of(response1, response2));
+		Mockito.when(mapper.toListResponse(produtos)).thenReturn(produtosResponse);
 
 		// Act
 		List<ProdutoListResponse> listaProdutos = service.listarProdutos(null, null);
 
 		// Assert
 		Assertions.assertThat(listaProdutos).containsExactlyInAnyOrder(response1, response2);
+		Mockito.verify(repository).findAll();
+		Mockito.verify(mapper).toListResponse(produtos);
 	}
 
 	@Test
